@@ -18,8 +18,8 @@ var (
 		"linux_amd64":   "tailwindcss-linux-x64",
 		"linux_arm64":   "tailwindcss-linux-arm64",
 		"linux_arm":     "tailwindcss-linux-armv7",
-		"windows_amd64": "tailwindcss-windows-x64",
-		"windows_arm64": "tailwindcss-windows-arm64",
+		"windows_amd64": "tailwindcss-windows-x64.exe",
+		"windows_arm64": "tailwindcss-windows-arm64.exe",
 	}
 )
 

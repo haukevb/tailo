@@ -1,4 +1,4 @@
-module github.com/paganotoni/tailo
+module github.com/haukevb/tailo
 
 go 1.20
 

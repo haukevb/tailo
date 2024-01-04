@@ -11,8 +11,6 @@ import (
 	"os"
 	"path/filepath"
 	"runtime"
-
-	"github.com/labstack/gommon/log"
 )
 
 var (

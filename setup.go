@@ -6,10 +6,13 @@ package tailo
 import (
 	"fmt"
 	"io"
+	"log"
 	"net/http"
 	"os"
 	"path/filepath"
 	"runtime"
+
+	"github.com/labstack/gommon/log"
 )
 
 var (
@@ -34,6 +37,8 @@ func Setup() error {
 		return fmt.Errorf("setup failed")
 	}
 
+	log.Printf("using filepath: %s", fullPath)
+
 	if _, err := os.Stat(fullPath); err == nil {
 		fmt.Println("tailwind CSS CLI binary already exists.")
 
@@ -48,9 +53,17 @@ func Setup() error {
 		return err
 	}
 
+	log.Printf("downloaded: %s", binary)
+
 	defer resp.Body.Close()
 	if resp.StatusCode != 200 {
 		return fmt.Errorf("could not download Tailwind CSS CLI binary: %s", resp.Status)
+	}
+
+	// Create the path
+	err = os.MkdirAll(binaryPath, 0755)
+	if err != nil {
+		return err
 	}
 
 	// Create the file
@@ -61,7 +74,7 @@ func Setup() error {
 
 	defer out.Close()
 
-	err = os.MkdirAll(binaryPath, 0755)
+	_, err = io.Copy(out, resp.Body)
 	if err != nil {
 		return err
 	}
@@ -71,7 +84,8 @@ func Setup() error {
 		return err
 	}
 
-	_, err = io.Copy(out, resp.Body)
+	log.Printf("tailwind can now be found at: %s", fullPath)
+
 	return err
 }
 

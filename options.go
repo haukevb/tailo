@@ -41,7 +41,7 @@ func UseOutputPath(path string) Option {
 }
 
 // UseBinaryPath sets the path to the TailwindCSS CLI binary otherwise it
-// defaults to "bin/tailwindcss".
+// defaults to "bin/".
 func UseBinaryPath(path string) Option {
 	return func() {
 		binaryPath = path

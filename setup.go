@@ -8,6 +8,7 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"path/filepath"
 	"runtime"
 )
 
@@ -80,6 +81,6 @@ func GetFullBinaryPath() (string, string, error) {
 	if !ok {
 		return "", "", fmt.Errorf("unsupported operating system and architecture: %s", currentArch)
 	}
-	fullPath := fmt.Sprintf("%s/%s", binaryPath, binary)
+	fullPath := filepath.Join(binaryPath, binary)
 	return fullPath, binary, nil
 }

@@ -15,14 +15,19 @@ func Build(options ...Option) {
 		option()
 	}
 
-	if _, err := os.Stat(binaryPath); os.IsNotExist(err) {
+	fullPath, _, err := GetFullBinaryPath()
+	if err != nil {
+		panic(err)
+	}
+
+	if _, err := os.Stat(fullPath); os.IsNotExist(err) {
 		err := Setup()
 		if err != nil {
 			panic(err)
 		}
 	}
 
-	cmd := exec.Command(binaryPath)
+	cmd := exec.Command(fullPath)
 	cmd.Args = append(cmd.Args, "--config", configPath)
 	cmd.Args = append(cmd.Args, "--input", inputPath)
 	cmd.Args = append(cmd.Args, "--output", outputPath)
@@ -32,7 +37,7 @@ func Build(options ...Option) {
 
 	fmt.Println("[tailo] Running:", cmd.String())
 
-	err := cmd.Run()
+	err = cmd.Run()
 	if err != nil {
 		panic(err)
 	}

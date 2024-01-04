@@ -10,8 +10,8 @@ var (
 	// outputPath is the path to the output file, the one with compiled CSS.
 	outputPath = "web/public/application.css"
 
-	// binaryPath is the path to the TailwindCSS CLI binary.
-	binaryPath = "bin/tailwindcss"
+	// binaryPath is the path to the TailwindCSS CLI binary (excluding executable).
+	binaryPath = "bin/"
 )
 
 type Option func()
